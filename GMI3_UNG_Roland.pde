@@ -1,15 +1,3 @@
-/////////////////////////////////////////////////////
-//
-// Démineur
-// DM "UED 131 - Programmation impérative" 2023-2024
-// NOM         : UNG
-// Prénom      : Roland
-// N° étudiant : 20231933
-//
-// Collaboration avec :
-//
-/////////////////////////////////////////////////////
-
 //déclaration de variables
 int cote, bandeau, colonnes, lignes, etat, time, start, score;
 final int INIT=0, STARTED=1, OVER=2, BLOC=1, EMPTY=0, FLAG=2;
@@ -19,56 +7,56 @@ boolean [][] bombes;
 
 
 void settings() { //initialise le programme
+  cote=20;
+  bandeau = 50;
+  colonnes = 30;
+  lignes = 16;
+  size(colonnes*cote, lignes*cote+bandeau); //30*20=600 et 16*20+50=370
 
-cote=20;
-bandeau = 50;
-colonnes = 30;
-lignes = 16;
-size(colonnes*cote, lignes*cote+bandeau); //30*20=600 et 16*20+50=370
+  etat = INIT;
 
-etat = INIT;
-
-//appel ici pour pas créer des bombes à l'infini et réinitialiser les tableaux
-init();
+  //appel ici pour pas créer des bombes à l'infini et réinitialiser les tableaux
+  init();
 }
 
 void draw() { //appelle les fonctions en permanent
-
-display();
-drawTime();
-drawScore();
+  display();
+  drawTime();
+  drawScore();
 }
 
 
 void init() { //initialise le jeu
+  //tableaux définis
+  paves = new int[colonnes][lignes];
+  bombes = new boolean[colonnes][lignes];
+  nb_bombes = new int[colonnes][lignes];
 
-//tableaux définis
-paves = new int[colonnes][lignes];
-bombes = new boolean[colonnes][lignes];
-nb_bombes = new int[colonnes][lignes];
+  //initialisation des tableaux
+  for (int x=0; x<colonnes; x++) {
+    for (int y=0; y<lignes; y++) {
+      paves[x][y]=BLOC;
+      bombes[x][y]=false; 
+      nb_bombes[x][y]=0; 
+    }
+  }
 
-//initialisation des tableaux
-for (int x=0; x<colonnes; x++) {
-for (int y=0; y<lignes; y++) {
-paves[x][y]=BLOC;
-bombes[x][y]=false; 
-nb_bombes[x][y]=0; 
-}}
+  //bombes aléatoires
+  for (int i=0; i<100; i++) {
+    int x= int(random(colonnes));
+    int y= int(random(lignes));
+    bombes[x][y]=true; 
+  }
 
-//bombes aléatoires
-for (int i=0; i<100; i++) {
-int x= int(random(colonnes));
-int y= int(random(lignes));
-bombes[x][y]=true; 
-}
-
-//calculer le nombre de bombes autour
-for (int x=0; x<colonnes; x++) {
-for (int y=0; y<lignes; y++) {
-if ((x-1)>0 && (y-1)>0) { //d'abord savoir si c'est dans la limite
-  if (bombes[x-1][y-1]==true) { //vérification bombes
-    nb_bombes[x][y] +=1 ; }}
-if ((x-1)>0) {
+  //calculer le nombre de bombes autour
+  for (int x=0; x<colonnes; x++) {
+    for (int y=0; y<lignes; y++) {
+      if ((x-1)>0 && (y-1)>0) { //d'abord savoir si c'est dans la limite
+        if (bombes[x-1][y-1]==true) { //vérification bombes
+          nb_bombes[x][y] +=1 ; 
+        }
+      }
+  if ((x-1)>0) {
   if (bombes[x-1][y]==true) {
     nb_bombes[x][y] +=1 ; }}
 if ((x-1)>0 && (y+1)<lignes) {
@@ -471,3 +459,4 @@ else if (score<1000) {
 text(score,7,40); }
 
 }
+
