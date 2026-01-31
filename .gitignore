@@ -1,0 +1,14 @@
+# Fichiers temporaires Processing
+*.class
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE / éditeurs
+.idea/
+.vscode/
+
+# Exports Processing
+application.*
