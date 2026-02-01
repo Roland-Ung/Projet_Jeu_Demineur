@@ -1,6 +1,6 @@
 # Jeu Démineur
 
-## Objectif
+## Objectifs
 Reproduire le fonctionnement du jeu Démineur tel que :
 - la gestion d’une grille 2D
 - les événements souris
